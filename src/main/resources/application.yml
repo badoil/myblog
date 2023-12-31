@@ -14,5 +14,7 @@ spring:
 server:
   port: 4000
 
+secretkey: S3cr3tk3y
+
 
 

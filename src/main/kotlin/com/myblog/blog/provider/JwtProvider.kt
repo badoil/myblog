@@ -3,6 +3,7 @@ package com.myblog.blog.provider
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import java.time.Instant
 import java.time.temporal.ChronoUnit
@@ -12,7 +13,8 @@ import java.util.Date
 @Component
 class JwtProvider {
 
-    private val secretKey: String = "S3cr3tk3y"
+    @Value("\${secretkey}")
+    private lateinit var secretKey: String
 
     fun create(email: String): String {
         val expiredDate: Date = Date.from(Instant.now().plus(1, ChronoUnit.HOURS))
@@ -26,7 +28,7 @@ class JwtProvider {
     }
 
     fun validate(jwt: String): String? {
-        var claims: Claims
+        val claims: Claims
         try {
             claims = Jwts.parser().setSigningKey(secretKey)
                 .parseClaimsJwt(jwt).body
