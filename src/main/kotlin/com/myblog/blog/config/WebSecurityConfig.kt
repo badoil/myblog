@@ -49,8 +49,8 @@ class FailedAuthenticationEntryPoint: AuthenticationEntryPoint {
         authException: AuthenticationException?
     ) {
         response?.contentType = "application/json"
-        response?.status = HttpServletResponse.SC_FORBIDDEN
-        response?.writer?.write("{\"code\":\"NP\", \"message\":\"Do not have permission.\"}")
+        response?.status = HttpServletResponse.SC_UNAUTHORIZED
+        response?.writer?.write("{\"code\":\"AF\", \"message\":\"Authorization Failed.\"}")
     }
 
 }
